@@ -1,0 +1,155 @@
+<html>
+    
+    <head>
+        <meta charset="UTF-8">
+        <title>lulu button</title>
+        <style>
+            body{font-family:serif,fantasy; background-image:url(background.png); background-size:cover; background-repeat: no-repeat;}
+            button{border: 0;border-radius: 12px; background-color: deeppink; color: azure; width: auto;height:auto; font-size: 16;
+                
+            transition-property: background; 
+            transition-duration: 0.4s; 
+            transition-timing-function: linear;
+            }
+            button:hover{background-color:grey;}
+            .menu{
+            background-color: grey;
+            transition-property: background; 
+            transition-duration: 0.4s; 
+            transition-timing-function: linear;}
+            .menu:hover{background-color:darkblue;}
+            .message{border-width: 3px;border-style: dashed;border-color:orange;}
+
+            .buttonArea{border-width: 3px; border-style: dashed; border-color: black;}
+            
+        </style>
+        
+        <script>
+            var i=0; //button number
+            var chosenVoice=[0,0,0,0,0,0,0,0,0,0,0,0];
+            var string1 ="";
+            var chosenVoiceTime=[0,0,0,0,0,0,0,0,0,0,0,0];
+            var lengthOfLastTimeClick=0;
+            
+            var novoice = new Audio("mp3/void.mp3");
+            var konlulu = new Audio("mp3/konlulu.mp3");//voice[0]
+            var subarashi = new Audio("mp3/subarashi.mp3");//voice[1]
+            var arigatougozaimashita = new Audio("mp3/arigatougozaimashita.mp3");//voice[2]
+            var tensaikamoshirenai = new Audio("mp3/tensaikamoshirenai.mp3");//voice[3]
+            var aaaa = new Audio("mp3/aaaa.mp3");//voice[4]
+            var sonna = new Audio("mp3/sonna.mp3");//voice[5]
+            var hoshii = new Audio("mp3/hoshii.mp3");//voice[6]
+            var kowakunaiyo = new Audio("mp3/kowakunaiyo.mp3");//voice[7]
+            var minnaakonlulu = new Audio("mp3/minnaakonlulu.mp3");//voice[8]
+            var hakaishinsuzuharalulu = new Audio("mp3/hakaishinsuzuharalulu.mp3");//voice[9]
+            var daamedesu = new Audio("mp3/daamedesu.mp3");//voice[10]
+            var yacchaeba_sa_ka_ = new Audio("mp3/yacchaeba_sa_ka_.mp3");//voice[11]
+            
+            var voice=[konlulu,subarashi,arigatougozaimashita,tensaikamoshirenai,aaaa,sonna,hoshii,kowakunaiyo,minnaakonlulu,hakaishinsuzuharalulu,daamedesu,yacchaeba_sa_ka_];
+            var voiceText=["こんるる","素晴らしい","ありがとうございました","天才かもしれない","ああああ","そんな","ほしい","怖くないよ","みんなぁ～こんるる～","破壊神鈴原るる","だぁ～めです","やっちゃえ！バーサーカー"];
+           
+            function display(){
+                
+                if(chosenVoice[i]%2==1){
+                    string1+=voiceText[i]+",";
+                    document.getElementById("message").innerHTML=string1;
+                    var date = new Date();
+                    chosenVoiceTime[i]=date.getTime();
+                    lengthOfLastTimeClick = voiceText[i].length+1;
+                  }
+                else{
+                    string1= string1.substring(0,string1.length-lengthOfLastTimeClick);
+                    document.getElementById("message").innerHTML=string1;
+                    chosenVoiceTime[i]=0;
+                    chosenVoice[i]=0;
+                }
+                
+            }
+            
+            
+            function playvoice(){
+            
+                not_chosen_to_novoice();
+            
+                for(var a=0;a<chosenVoice.length;a++){
+                    var min=0;
+                    var temp=0;
+                    for(var b=a+1;b<chosenVoice.length;b++){
+                if(chosenVoiceTime[a]>chosenVoiceTime[b])
+                {
+                    min = chosenVoiceTime[b];
+                    chosenVoiceTime[b] = chosenVoiceTime[a];
+                    chosenVoiceTime[a] = min;
+                    temp=voice[b];
+                    voice[b] =voice[a];
+                    voice[a] = temp;
+                    
+                }         
+                }
+                   }
+                
+      
+            voice[0].play();
+            voice[0].onended=function(){voice[1].play();};
+            voice[1].onended=function(){voice[2].play();};
+            voice[2].onended=function(){voice[3].play();};
+            voice[3].onended=function(){voice[4].play();};
+            voice[4].onended=function(){voice[5].play();};
+            voice[5].onended=function(){voice[6].play();};
+            voice[6].onended=function(){voice[7].play();};
+            voice[7].onended=function(){voice[8].play();};
+            voice[8].onended=function(){voice[9].play();};
+            voice[9].onended=function(){voice[10].play();};
+            voice[10].onended=function(){voice[11].play();};
+                
+         }
+            
+            function not_chosen_to_novoice(){
+             for(var count=0;count<chosenVoice.length;count++){
+                 if(chosenVoice[count] ==0){voice[count]=novoice;}
+             }
+         }
+            
+            function reset(){
+             chosenVoice=[0,0,0,0,0,0,0,0,0,0,0,0];
+             string1 ="";
+             chosenVoiceTime=[0,0,0,0,0,0,0,0,0,0,0,0];
+             lengthOfLastTimeClick=0;
+             document.getElementById("message").innerHTML=string1;
+            }
+               
+            
+        </script>
+    </head>
+    
+    <body>
+        
+        <p id="message" class="message"></p><br>
+        <button id="play" class="menu" onclick='playvoice();'>全部再生</button>
+        <button id="reset" class="menu" onclick='reset();'>リセット</button>
+        <br><br>
+        <br>
+        下のボタンを押すと、音声が自動的に1回再生され、テキストが上のフィールドに配置されます。<br>
+        もう一度押すれば、配置がキャンセルされます。<br>
+        配置後、全部再生を押すと、選択した音声が連続して再生されます<br>
+        リセットボタンを押してすべてをリセットします<br>
+        <br>
+        <div id="buttonArea" class="buttonArea">
+        <button id="bt1" onclick='i=0;chosenVoice[i]++;display();voice[0].play();'>こんるる</button>
+        <button id="bt2" onclick='i=1;chosenVoice[i]++;display();voice[1].play();'>素晴らしい</button>
+        <button id="bt3" onclick='i=2;chosenVoice[i]++;display();voice[2].play();'>ありがとうございました</button>
+        <button id="bt4" onclick='i=3;chosenVoice[i]++;display();voice[3].play();'>天才かもしれない</button><br>
+        <button id="bt5" onclick='i=4;chosenVoice[i]++;display();voice[4].play();'>ああああ</button>
+        <button id="bt6" onclick='i=5;chosenVoice[i]++;display();voice[5].play();'>そんな</button>
+        <button id="bt7" onclick='i=6;chosenVoice[i]++;display();voice[6].play();'>ほしい</button>
+        <button id="bt8" onclick='i=7;chosenVoice[i]++;display();voice[7].play();'>怖くないよ</button><br>
+        <button id="bt9" onclick='i=8;chosenVoice[i]++;display();voice[8].play();'>みんなぁ～こんるる～</button>
+        <button id="bt10" onclick='i=9;chosenVoice[i]++;display();voice[9].play();'>破壊神鈴原るる</button>
+        <button id="bt11" onclick='i=10;chosenVoice[i]++;display();voice[10].play();'>だぁ～めです</button>
+        <button id="bt12" onclick='i=11;chosenVoice[i]++;display();voice[11].play();'>やっちゃえ！バーサーカー</button><br>
+        
+        </div><br>
+        <a href="zh/konluluzh.html" target="_blank">中文版</a>
+        
+    </body>
+</html>
