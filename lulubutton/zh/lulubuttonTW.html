@@ -1,0 +1,143 @@
+<html>
+    <head>
+        <style>
+            body{font-family:serif,fantasy; background-image:url(../img/background.png); background-size:cover; background-repeat: no-repeat;}
+            button{border: 0;border-radius: 12px; background-color: deeppink; color: azure; width: auto;height:auto; font-size: 16;
+                
+            transition-property: background; 
+            transition-duration: 0.4s; 
+            transition-timing-function: linear;
+            }
+            #disabled{background-color: gainsboro;}
+           
+            button:hover{background-color:grey;}
+            .menu{
+            background-color: grey;
+            transition-property: background; 
+            transition-duration: 0.4s; 
+            transition-timing-function: linear;}
+            .menu:hover{background-color:darkblue;}
+
+            .buttonArea{border-width: 3px; border-style: dashed; border-color: black;}
+        </style>
+        
+        <script>
+            
+            
+            var string1 ="";
+            
+            var voice = new Array;
+            var voiceText = new Array;
+            var br = 0;
+            
+            var a=0;
+            var choosingVoice = -1;
+            var times=0;
+            
+           
+            function addvoice(k,newvoice,newvoicetext){
+                newvoice = new Audio("../mp3/"+newvoice+".mp3");
+                voice.push(newvoice);
+                voiceText.push(newvoicetext);
+               document.getElementById('newbutton').innerHTML+="<button onclick='voice["+k+"].play();choosingVoice="+k+";canceldisabled();times++;toomanytimes();'>"+newvoicetext+"</button> "
+                br++;
+                if(br%4==0){ document.getElementById('newbutton').innerHTML+=" <br>"}
+
+            }
+            
+            function randomplay(){
+                var randomNumber = Math.floor(Math.random()*voice.length);
+                voice[randomNumber].play();
+                times++;
+                toomanytimes();
+            }
+            
+            function loopplay(){
+                var check = document.getElementById('c');
+                if(check.checked==true){
+                    loop();
+                }else{}
+                
+            }
+            function loop(){
+                var check2 = document.getElementById('c');
+                if(check2.checked==true){
+                    if(choosingVoice==-1){}else{
+                        toomanytimes();
+                voice[choosingVoice].play(); times++;
+                voice[choosingVoice].onended=function(){loop();}}}
+            }
+            function canceldisabled(){
+                if(choosingVoice!=-1){
+                    document.getElementById('c').disabled=false;
+                    document.getElementById('disabled').style=
+            "background-color: grey;transition-property: background;transition-duration: 0.4s; transition-timing-function: linear;"
+                }     
+            }
+            function toomanytimes(){
+                if(times>=10 && times<=15){
+                    document.body.style.background ="url('')";
+                }
+                if(times>15 && times<=20){
+                    document.body.style.background ="gainsboro";
+                }
+                if(times>20 && times<=25){
+                    document.body.style.background ="grey";
+                }
+                if(times>25 && times<=30){
+                    document.body.style.background ="#880000";
+                }
+                if(times>30 && times<=35){
+                    document.body.style.background = "url('../img/eldritch.jpg') repeat";
+                }
+                if(times>35 && times<=40){
+                    document.body.style.background = "url('../img/eldritch2.jpg') repeat";
+                }
+                if(times>40 && times<=45){
+                    document.body.style.background = "url('../img/eldritch3.jpg') repeat";
+                }
+                 if(times>45 && times<=50){
+                    document.body.style.background = "url('../img/eldritch4.jpg') repeat";
+                }
+                if(times>50){
+                    document.body.style.background = "url('../img/YOU_DIED.jpg') no-repeat center";
+                    
+                }
+            }
+            
+        </script>
+    </head>
+    
+    <body onload='
+                  addvoice(0,"konlulu","空露露")
+                  addvoice(1,"subarashi","太棒了");
+                  addvoice(2,"arigatougozaimashita","謝謝");
+                  addvoice(3,"tensaikamoshirenai","也許是個天才");
+                  addvoice(4,"aaaa","啊啊啊啊");
+                  addvoice(5,"sonna","怎麼這樣");
+                  addvoice(6,"hoshii","想要");
+                  addvoice(7,"kowakunaiyo","一點都不可怕喔");
+                  addvoice(8,"minnaakonlulu","大家~空露露~");
+                  addvoice(9,"hakaishinsuzuharalulu","破壊神鈴原露露");
+                  addvoice(10,"daamedesu","不行喔~");
+                  addvoice(11,"yacchaeba_sa_ka_","上吧！Berserker!");
+                  addvoice(12,"okashiijyanaidesuka","難道不奇怪嗎");
+                
+                  '>
+        <button id="randomplay" class="menu" onclick='randomplay();'>隨機播放</button>
+        <button id="disabled" class="menu"><input type="checkbox" id="c" onclick='loopplay();' disabled><label for="c">循環播放</label></button>
+        <br><br>
+        <br>
+        按下底下的按鈕後，會自動播放一次該語音<br>
+        按下底下的按鈕後、若再勾選循環播放按鈕、則會重複播放該語音<br>
+        按下隨機播放按鈕後，會隨機播放下方語音中的其中一個<br>
+        有傳言指出，聽了太多次語音的話，會有意想不到的事情發生...<br>
+        <br>
+        <div id="buttonArea" class="buttonArea">
+        
+            <p id="newbutton" class="newbutton"></p>
+        </div><br>
+        <a href="../lulubutton.html" target="_blank">日本語版</a>
+        
+    </body>
+</html>
