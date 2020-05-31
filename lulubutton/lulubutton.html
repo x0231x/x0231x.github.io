@@ -1,7 +1,7 @@
 <html>
     <head>
         <style>
-            body{font-family:serif,fantasy; background-image:url(img/background.png); background-size:cover; background-repeat: no-repeat;}
+            body{font-family:serif,fantasy; background-image:url(img/background.png); background-size:cover; background-repeat: no-repeat; background-color: gray;}
             button{border: 0;border-radius: 12px; background-color: deeppink; color: azure; width: auto;height:auto; font-size: 16;
                 
             transition-property: background; 
@@ -19,6 +19,8 @@
             .menu:hover{background-color:darkblue;}
 
             .buttonArea{border-width: 3px; border-style: dashed; border-color: black;}
+            #youtube{position: absolute;left: 80px;bottom: 50px;}
+            #twitter{position: absolute;left: 20px;bottom: 50px;}
         </style>
         
         <script>
@@ -98,9 +100,34 @@
                  if(times>45 && times<=50){
                     document.body.style.background = "url('img/eldritch4.jpg') repeat";
                 }
-                if(times>50){
+                if(times==51){
+                    document.body.style.background = "url('img/bigfacelulu.png') no-repeat left";
+                    setTimeout(function(){ document.body.style.background = "url('img/bigfacelulu.png') no-repeat center";},300);
+                }
+                if(times==52){
+                    document.body.style.background = "url('img/bigfacelulu.png') no-repeat top";
+                    setTimeout(function(){ document.body.style.background = "url('img/bigfacelulu.png') no-repeat center";},300);
+                }
+                if(times==53){
+                    document.body.style.background = "url('img/bigfacelulu.png') no-repeat bottom";
+                    setTimeout(function(){ document.body.style.background = "url('img/bigfacelulu.png') no-repeat top";},300);
+                }
+                if(times==54){
+                    document.body.style.background = "url('img/bigfacelulu.png') no-repeat center";
+                    setTimeout(function(){ document.body.style.background = "url('img/bigfacelulu.png') no-repeat buttom";},300);
+                }
+                if(times==55){
+                    document.body.style.background = "url('img/bigfacelulu.png') no-repeat left";
+                    setTimeout(function(){ document.body.style.background = "url('img/bigfacelulu.png') no-repeat center";},300);
+                }
+                
+                if(times==56){
                     document.body.style.background = "url('img/YOU_DIED.jpg') no-repeat center";
-                    
+                    document.getElementById('instruction').style="color:red;";
+                    setInterval(function(){voice[0].play(); document.getElementById('instruction').innerHTML+="こんるる"},100);
+                }
+                if(times>56){
+                    document.body.style.background = "url('img/YOU_DIED.jpg') no-repeat center";
                 }
             }
             
@@ -108,7 +135,7 @@
     </head>
     
     <body onload='
-                  addvoice(0,"konlulu","こんるる")
+                  addvoice(0,"konlulu","こんるる");
                   addvoice(1,"subarashi","素晴らしい");
                   addvoice(2,"arigatougozaimashita","ありがとうございました");
                   addvoice(3,"tensaikamoshirenai","天才かもしれない");
@@ -128,16 +155,20 @@
         <button id="disabled" class="menu"><input type="checkbox" id="c" onclick='loopplay();' disabled><label for="c">ループ</label></button>
         <br><br>
         <br>
+        <div id="instruction">
         下のボタンを押すと、音声が1回再生され<br>
         下のボタンを押すたら、ループオプションをチェックと、音声がループ再生されます<br>
         ランダムボタンを押すと、音声がランダム1回再生され<br>
         という噂があります「何度も音声を聞くと、不思議なことが起こります。」......<br>
-        
+        </div>
         <br>
         <div id="buttonArea" class="buttonArea">
         
             <p id="newbutton" class="newbutton"></p>
         </div><br>
+        <a href="https://www.youtube.com/channel/UC_a1ZYZ8ZTXpjg9xUY9sj8w" target="_blank"><img src ="img/youtube.png" width="90px" height="40px" id="youtube" class="link"></a>
+         <a href="https://twitter.com/lulu_suzuhara" target="_blank"><img src ="img/twitter.png" width="50px" height="40px" id="twitter" class="link"> </a><br>
+        <br>
         <a href="zh/lulubuttonTW.html" target="_blank">中文版</a>
         
     </body>
