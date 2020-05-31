@@ -21,6 +21,7 @@
             .buttonArea{border-width: 3px; border-style: dashed; border-color: black;}
             #youtube{position: absolute;left: 80px;bottom: 50px;}
             #twitter{position: absolute;left: 20px;bottom: 50px;}
+            #loadArea{display: flex;align-items: center;justify-content:  center;}
         </style>
         
         <script>
@@ -35,6 +36,7 @@
             var a=0;
             var choosingVoice = -1;
             var times=0;
+            
            
             function addvoice(k,newvoice,newvoicetext){
                 newvoice = new Audio("mp3/"+newvoice+".mp3");
@@ -131,10 +133,15 @@
                 }
             }
             
+            function loading(){
+                var objLoading =document.getElementById('loadArea');
+                if (objLoading != null){objLoading.style.display = "none";}   
+            }
+            
         </script>
     </head>
     
-    <body onload='
+    <body onload='loading();
                   addvoice(0,"konlulu","こんるる");
                   addvoice(1,"subarashi","素晴らしい");
                   addvoice(2,"arigatougozaimashita","ありがとうございました");
@@ -150,6 +157,7 @@
                   addvoice(12,"okashiijyanaidesuka","おかしいじゃないですか");
                 
                   '>
+        <div id="loadArea"><img src="img/loading.gif" id="loading"></div>
         
         <button id="randomplay" class="menu" onclick='randomplay();'>ランダム</button>
         <button id="disabled" class="menu"><input type="checkbox" id="c" onclick='loopplay();' disabled><label for="c">ループ</label></button>
